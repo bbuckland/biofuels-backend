@@ -95,9 +95,9 @@ var SampleApp = function() {
     self.createRoutes = function() {
         self.routes = { };
 
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
+        self.routes['/login'] = function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ status: 'Ok', data: { username: 'bbuckland' }}, null, 3));
         };
 
         self.routes['/'] = function(req, res) {
@@ -117,7 +117,7 @@ var SampleApp = function() {
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
+            self.app.post(r, self.routes[r]);
         }
     };
 
