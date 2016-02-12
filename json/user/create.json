@@ -1,0 +1,16 @@
+{
+  "title": "User Creation",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "password": {
+      "type": "string"
+    }
+  },
+  "required": ["full_name", "email", "password"]
+}
