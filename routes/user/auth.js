@@ -107,7 +107,8 @@ router.post('/', function (req, res) {
     res.status(500);
     return res.json({
       code: 500,
-      error: 'Uh oh! We can\'t even!'
+      error: 'Uh oh! We can\'t even!',
+      data: process.env
     });
   });
 });
