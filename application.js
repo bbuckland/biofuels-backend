@@ -7,12 +7,15 @@
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 //setup our express app
 var app = express();
 
 //setup socket.io
 var server = http.createServer(app);
+
+app.use(cors());
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

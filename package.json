@@ -29,6 +29,7 @@
     "ajv": "^3.5.3",
     "bluebird": "^3.2.2",
     "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.5.4",
     "mysql": "^2.10.2"
