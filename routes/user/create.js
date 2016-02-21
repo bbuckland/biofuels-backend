@@ -48,14 +48,48 @@ router.post('/', function (req, res) {
   var sql = 'INSERT INTO `bio_users`(`full_name`, `email`, `password_hash`) VALUES (? , ? , ?)';
   var sqlParams = [params.full_name, params.email, params.password];
 
-  db.query(sql, sqlParams, function(err){
+  var sql1 = 'SELECT * FROM bio_users WHERE email = ?';
+  var sqlParams1 = [params.email];
 
-      if(err)
-          throw err;
-      else
-        console.log("OK");
+   db.query(sql1, sqlParams1).then(function (data) {
+       if (data.length != 1) {
 
+
+           db.query(sql, sqlParams).then(function () {
+               //setup our response
+               var resp = {
+                   status: 'OK'
+               };
+               //send down our response
+               res.json(resp);
+           }).catch(function (err) {
+               console.error('MySQL: ', err);
+               res.status(500);
+               return res.json({
+                   code: 500,
+                   error: 'Uh oh! We can\'t even!',
+                   data: process.env
+               });
+           });
+       }
+       else
+       {   console.error('User already exists');
+           res.status(409);
+           return res.json({
+           code: 409,
+           error: "Conflict: User already exists"
+           });
+       }
+   }).catch(function (err) {
+       console.error('MySQL: ', err);
+       res.status(500);
+        return res.json({
+           code: 500,
+           error: 'Uh oh! We can\'t even!',
+           data: process.env
+        });
   });
+
 });
 
 //export our router
