@@ -45,67 +45,16 @@ router.post('/', function (req, res) {
     });
   }
 
-  var sql = 'INSERT INTO * FROM bio_users WHERE email = ? AND password_hash = ?';
-  var sqlParams = [params.email, params.password];
+  var sql = 'INSERT INTO `bio_users`(`full_name`, `email`, `password_hash`) VALUES (? , ? , ?)';
+  var sqlParams = [params.full_name, params.email, params.password];
 
-  db.query(sql, sqlParams).then(function (data) {
-    if (data.length != 1) {
-      res.status(401);
-      return res.json({
-        code: 401,
-        error: "That user was not found"
-      });
-    }
+  db.query(sql, sqlParams, function(err){
 
-    //setup our response
-    var response = data[0];
+      if(err)
+          throw err;
+      else
+        console.log("OK");
 
-    console.log(data[0]);
-    //validate password
-    if (response.password_hash !== params.password) {
-      //TODO setup error handler for unified error responses
-      res.status(401);
-      return res.json({
-        code: 401,
-        error: "Passwords do not match! "
-      });
-    }
-
-    //get jwt seret
-    var secret = process.env.SECRET_KEY || 'dev :: biofuels makes algae cool again';
-
-    //setup jwt options
-    var options = {
-      algorithm: 'HS256',
-      expiresInMinutes: '1440',
-      subject: 'biofuels-dev',
-      issue: 'biofuels',
-      audience: data[0].email
-    };
-
-    //setup jwt payload
-    var payload = {
-      email: data[0].email,
-      date: new Date()
-    };
-
-    //generate JWT
-    var token = jwt.sign(payload, secret, options);
-
-    var resp = {
-      status: 'Ok'
-    };
-
-    //send down our response
-    res.json(resp);
-  }).catch(function (err) {
-    console.error('MySQL: ', err);
-
-    res.status(500);
-    return res.json({
-      code: 500,
-      error: 'Uh oh! We can\'t even!'
-    });
   });
 });
 
