@@ -52,41 +52,37 @@ router.post('/', function (req, res) {
   var sqlParams1 = [params.email];
 
    db.query(sql1, sqlParams1).then(function (data) {
-       if (data.length != 1) {
-
-
-           db.query(sql, sqlParams).then(function () {
-               //setup our response
-               var resp = {
-                   status: 'OK'
-               };
-               //send down our response
-               res.json(resp);
-           }).catch(function (err) {
-               console.error('MySQL: ', err);
-               res.status(500);
-               return res.json({
-                   code: 500,
-                   error: 'Uh oh! We can\'t even!',
-                   data: process.env
-               });
-           });
-       }
-       else
-       {   console.error('User already exists');
-           res.status(409);
-           return res.json({
-           code: 409,
-           error: "Conflict: User already exists"
-           });
-       }
+     if (data.length < 1) {
+       db.query(sql, sqlParams).then(function () {
+           //setup our response
+           var resp = {
+               status: 'Ok'
+           };
+           //send down our response
+           res.json(resp);
+       }).catch(function (err) {
+         console.error('MySQL: ', err);
+         res.status(500);
+         return res.json({
+           code: 500,
+           error: 'Uh oh! We can\'t even!'
+         });
+       });
+     }
+     else {
+       console.error('User ' + params.email + ' already exists');
+       res.status(409);
+       return res.json({
+        code: 409,
+        error: "Conflict: User already exists"
+       });
+     }
    }).catch(function (err) {
        console.error('MySQL: ', err);
        res.status(500);
         return res.json({
            code: 500,
-           error: 'Uh oh! We can\'t even!',
-           data: process.env
+           error: 'Uh oh! We can\'t even!'
         });
   });
 
