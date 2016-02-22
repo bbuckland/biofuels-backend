@@ -29,6 +29,8 @@ app.use('/docs', express.static('docs'));
 //setup our user routes
 app.use('/api/v1/user/auth', require('./routes/user/auth'));
 app.use('/api/v1/user/create', require('./routes/user/create'));
+app.use('/api/v1/batch', require('./routes/batch'));
+app.use('/api/v1/sample', require('./routes/sample'));
 
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
