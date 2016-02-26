@@ -6,7 +6,7 @@
       "type": "string"
     },
     "customer_code": {
-      "type": "number"
+      "type": "string"
     },
     "contact_name1": {
       "type": "string"
@@ -38,9 +38,9 @@
     "phone_number": {
       "type": "number"
     },
-    "purchase_order_num": {
+    "po_num": {
       "type": "array"
     }
   },
-  "required": ["customer_name", "customer_code", "contact_name1", "email", "phone_number"]
+  "required": ["customer_name", "customer_code", "contact_name1", "billing_name", "email", "phone_number"]
 }

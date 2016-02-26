@@ -57,11 +57,33 @@ router.post('/', function (req, res) {
 
     db.query(sql1, sqlParams1).then(function (data) {
         if (data.length < 1) {
-            db.query(sql, sqlParams).then(function () {
+            db.query(sql, sqlParams).then(function (data) {
+
+
+
+                var insertedID = data.insertId;
+                for (var count=0; count<params.po_num.length; count++)
+                {
+                    var sql2 = 'INSERT INTO `bio_po_numbers` (`customer_id`, `po_number`) VALUES (? , ? )';
+                    var sqlParams2 = [insertedID, params.po_num[count]];
+                    db.query(sql2, sqlParams2).then(function () {
+
+
+                    }).catch(function (err) {
+                        console.error('MySQL: ', err);
+                        res.status(500);
+                        return res.json({
+                            code: 500,
+                            error: 'Uh oh! We can\'t even!'
+                        });
+                    });
+
+                }
                 //setup our response
                 var resp = {
                     status: 'Ok'
                 };
+
                 //send down our response
                 res.json(resp);
             }).catch(function (err) {
