@@ -47,7 +47,7 @@ router.get('/', function (req, res) {
             error: validate.errors
         });
     }
-    var sql = 'SELECT * FROM bio_batches';
+    var sql = 'SELECT * FROM bio_customers';
 
 
     db.query(sql).then(function (data) {
@@ -86,3 +86,6 @@ router.get('/', function (req, res) {
 
 //export our router
 module.exports = router;
+/**
+ * Created by joa3894 on 2/26/2016.
+ */

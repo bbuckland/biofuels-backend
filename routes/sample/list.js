@@ -44,7 +44,7 @@ router.get('/', function (req, res) {
             res.status(401);
             return res.json({
                 code: 401,
-                error: "That user was not found"
+                error: "No samples were found"
             });
         }
 
