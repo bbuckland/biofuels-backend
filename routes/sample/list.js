@@ -13,13 +13,12 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 
-var db = require('../library/mysql-pool.js');
+var db = require('../../library/mysql-pool.js');
 
 //init express router
 var router = express.Router();
 
-var ajv = Ajv(); // options can be passed
-var validate = ajv.compile(authSchema);
+
 
 /**
  * @api {post} /user/auth Authenticate
@@ -36,18 +35,8 @@ var validate = ajv.compile(authSchema);
  */
 router.get('/', function (req, res) {
 
-    var params = req.head;
 
-    if (!validate(params)) {
-        console.error('JSON: ', validate.errors);
-
-        res.status(422);
-        return res.json({
-            code: 422,
-            error: validate.errors
-        });
-    }
-    var sql = 'SELECT * FROM bio_batches';
+    var sql = 'SELECT * FROM bio_samples';
 
 
     db.query(sql).then(function (data) {
