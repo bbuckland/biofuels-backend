@@ -32,8 +32,9 @@ app.use('/docs', express.static('docs'));
 //setup our user routes
 app.use('/api/v1/user/auth', require('./routes/user/auth'));
 app.use('/api/v1/user/create', require('./routes/user/create'));
-app.use('/api/v1/batch', require('./routes/batch/list'));
-app.use('/api/v1/sample', require('./routes/sample/list'));
+app.use('/api/v1/batch/create', require('./routes/batch/create'));
+app.use('/api/v1/batch/list', require('./routes/batch/list'));
+app.use('/api/v1/sample/list', require('./routes/sample/list'));
 app.use('/api/v1/customer/create', require('./routes/customer/create'));
 app.use('/api/v1/customer/list', require('./routes/customer/list'));
 

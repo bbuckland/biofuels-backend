@@ -19,7 +19,7 @@ var db = require('../../library/mysql-pool.js');
 var router = express.Router();
 
 var ajv = Ajv(); // options can be passed
-var validate = ajv.compile(authSchema);
+//var validate = ajv.compile(authSchema);
 
 /**
  * @api {post} /user/auth Authenticate

@@ -1,0 +1,54 @@
+{
+  "title": "Customer Creation",
+  "type": "object",
+  "properties": {
+    "customer_code": {
+      "type": "string"
+    },
+    "received_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}$"
+    },
+    "shipped_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}$"
+    },
+    "sample_purpose": {
+      "type": "string"
+    },
+    "sample_storage_location": {
+      "type": "string"
+    },
+    "sample_data": {
+      "type": "array",
+      "items":{
+        "type": "object",
+        "properties": {
+          "sample_type": {
+            "type": "string"
+          },
+          "sample_name": {
+            "type": "string"
+          },
+          "sample_description": {
+            "type": "string"
+          },
+          "species_id": {
+            "type": "string"
+          },
+          "container_type": {
+            "type": "string"
+          },
+          "collection_date": {
+            "type": "string",
+            "pattern": "^[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}$"
+          },
+          "is_limited": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": ["customer_code", "received_date", "shipped_date", "sample_purpose", "sample_storage_location", "sample_data"]
+}
