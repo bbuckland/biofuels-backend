@@ -36,7 +36,7 @@
       "type": "string"
     },
     "phone_number": {
-      "type": "number"
+      "type": "string"
     },
     "po_num": {
       "type": "array"
