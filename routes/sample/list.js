@@ -51,7 +51,7 @@ router.get('/', function (req, res) {
         //setup our response
         var response = data[0];
 
-        console.log(data[0]);
+        console.log(response);
         //validate password
 
         var resp = {

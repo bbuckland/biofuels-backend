@@ -18,9 +18,6 @@ var db = require('../../library/mysql-pool.js');
 //init express router
 var router = express.Router();
 
-var ajv = Ajv(); // options can be passed
-//var validate = ajv.compile(authSchema);
-
 /**
  * @api {post} /user/auth Authenticate
  * @apiName authUser
@@ -36,17 +33,7 @@ var ajv = Ajv(); // options can be passed
  */
 router.get('/', function (req, res) {
 
-    var params = req.head;
 
-    if (!validate(params)) {
-        console.error('JSON: ', validate.errors);
-
-        res.status(422);
-        return res.json({
-            code: 422,
-            error: validate.errors
-        });
-    }
     var sql = 'SELECT * FROM bio_batches';
 
 
@@ -62,7 +49,7 @@ router.get('/', function (req, res) {
         //setup our response
         var response = data[0];
 
-        console.log(data[0]);
+        console.log(response);
         //validate password
 
         var resp = {
