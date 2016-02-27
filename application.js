@@ -32,8 +32,10 @@ app.use('/docs', express.static('docs'));
 //setup our user routes
 app.use('/api/v1/user/auth', require('./routes/user/auth'));
 app.use('/api/v1/user/create', require('./routes/user/create'));
-app.use('/api/v1/batch', require('./routes/batch'));
-app.use('/api/v1/sample', require('./routes/sample'));
+app.use('/api/v1/batch', require('./routes/batch/list'));
+app.use('/api/v1/sample', require('./routes/sample/list'));
+app.use('/api/v1/customer/create', require('./routes/customer/create'));
+app.use('/api/v1/customer/list', require('./routes/customer/list'));
 
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);

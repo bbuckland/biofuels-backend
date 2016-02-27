@@ -13,7 +13,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 
-var db = require('../library/mysql-pool.js');
+var db = require('../../library/mysql-pool.js');
 
 //init express router
 var router = express.Router();
@@ -47,7 +47,7 @@ router.get('/', function (req, res) {
             error: validate.errors
         });
     }
-    var sql = 'SELECT * FROM bio_batches';
+    var sql = 'SELECT * FROM bio_customers';
 
 
     db.query(sql).then(function (data) {
@@ -55,7 +55,7 @@ router.get('/', function (req, res) {
             res.status(401);
             return res.json({
                 code: 401,
-                error: "That user was not found"
+                error: "No customers were found"
             });
         }
 
@@ -86,3 +86,6 @@ router.get('/', function (req, res) {
 
 //export our router
 module.exports = router;
+/**
+ * Created by joa3894 on 2/26/2016.
+ */
