@@ -16,26 +16,26 @@
       "type": "string"
     },
     "Mass_50ml_fa": {
-      "type": "string"
+      "type": "number"
     },
     "Con_C15FA_ISTD": {
-      "type": "string"
+      "type": "number"
     },
     "Mass_50ml_C13": {
-      "type": "string"
+      "type": "number"
     },
     "Con_C13_ISTD": {
-      "type": "string"
+      "type": "number"
     },
     "Con_C19_ISTD": {
-      "type": "string"
+      "type": "number"
     },
     "Mass_50ml_C15": {
-      "type": "string"
+      "type": "number"
     },
     "Mass_450ml_sample": {
-      "type": "string"
+      "type": "number"
     }
   },
-  "required": ["vial_type", "vial_id", "preparation_date", "status"]
+  "required": ["vial_type", "vial_id", "preparation_date", "vial_status"]
 }
