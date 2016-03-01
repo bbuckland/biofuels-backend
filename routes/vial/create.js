@@ -66,7 +66,7 @@ router.post('/', function (req, res) {
                 var insertedID = data.insertId;
                 if (params.vial_type === "GC")
                 {
-                    var sql2 = 'INSERT INTO `bio_vials_gc`(`vial_id`, `Mass_50ml_C13`, `Con_C13_ISTD`, `Con_C19_ISTD`) VALUES (? , ? , ? , ?)';
+                    var sql2 = 'INSERT INTO `bio_vials_gc`(`vial_id`, `c13_mass`, `c13_istd_concentration`, `c19_istd_concentration`) VALUES (? , ? , ? , ?)';
                     var sqlParams2 = [insertedID, params.Mass_50ml_C13, params.Con_C13_ISTD, params.Con_C19_ISTD];
                     db.query(sql2, sqlParams2).then(function () {
 
@@ -83,7 +83,7 @@ router.post('/', function (req, res) {
                 }
                 else if (params.vial_type === "RXN")
                 {
-                    sql2 = 'INSERT INTO `bio_vials_rxn`(`vial_id`, `Mass_50ml_fa`, `Con_C15FA_ISTD`) VALUES (? , ? , ? )';
+                    sql2 = 'INSERT INTO `bio_vials_rxn`(`vial_id`, `fatty_acid_mass`, `c15_istd_concentration`) VALUES (? , ? , ? )';
                     sqlParams2 = [insertedID, params.Mass_50ml_fa, params.Con_C15FA_ISTD];
                     db.query(sql2, sqlParams2).then(function () {
 
@@ -100,7 +100,7 @@ router.post('/', function (req, res) {
                 }
                 else if (params.vial_type === "SPK")
                 {
-                    sql2 = 'INSERT INTO `bio_vials_spike`(`vial_id`, `Mass_50ml_C15`, `Mass_450ml_sample`) VALUES (? , ?, ?)';
+                    sql2 = 'INSERT INTO `bio_vials_spike`(`vial_id`, `c15_mass`, `Mass_450ml_sample`) VALUES (? , ?, ?)';
                     sqlParams2 = [insertedID, params.Mass_50ml_C15, params.Mass_450ml_sample];
                     db.query(sql2, sqlParams2).then(function () {
 
