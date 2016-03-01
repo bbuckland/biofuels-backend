@@ -11,6 +11,7 @@ var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 var authSchema = require('../../json/user/create.json');
 var db = require('../../library/mysql-pool.js');
+var crypto = require('crypto');
 
 //init express router
 var router = express.Router();
@@ -44,9 +45,16 @@ router.post('/', function (req, res) {
       error: validate.errors
     });
   }
+    var key = process.env.HASH_KEY || 'dev :: biofuels makes algae cool again';
+    var hash = crypto.createHmac('sha512', key);
+    hash.update(params.password);
+    var password_hash = hash.digest('hex');
+
+    console.log(password_hash);
+
 
   var sql = 'INSERT INTO `bio_users`(`full_name`, `email`, `password_hash`) VALUES (? , ? , ?)';
-  var sqlParams = [params.full_name, params.email, params.password];
+  var sqlParams = [params.full_name, params.email, password_hash];
 
   var sql1 = 'SELECT * FROM bio_users WHERE email = ?';
   var sqlParams1 = [params.email];

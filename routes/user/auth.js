@@ -11,6 +11,7 @@ var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 var authSchema = require('../../json/user/auth.json');
 var db = require('../../library/mysql-pool.js');
+var crypto = require('crypto');
 
 //init express router
 var router = express.Router();
@@ -45,8 +46,15 @@ router.post('/', function (req, res) {
     });
   }
 
+  var key = process.env.HASH_KEY || 'dev :: biofuels makes algae cool again';
+  var hash = crypto.createHmac('sha512', key);
+  hash.update(params.password);
+  var password_hash = hash.digest('hex');
+
+
+
   var sql = 'SELECT * FROM bio_users WHERE email = ? AND password_hash = ?';
-  var sqlParams = [params.email, params.password];
+  var sqlParams = [params.email, password_hash];
 
   db.query(sql, sqlParams).then(function (data) {
     if (data.length != 1) {
@@ -60,9 +68,9 @@ router.post('/', function (req, res) {
     //setup our response
     var response = data[0];
 
-    console.log(data[0]);
+    console.log(data[0].password_hash);
     //validate password
-    if (response.password_hash !== params.password) {
+    if (response.password_hash !== password_hash) {
       //TODO setup error handler for unified error responses
       res.status(401);
       return res.json({

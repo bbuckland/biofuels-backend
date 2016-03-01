@@ -21,7 +21,7 @@ if(process.env.OPENSHIFT_MYSQL_DB_HOST) {
   host = 'localhost';
   port = '3306';
   user = 'root';
-  pass = 'root';
+  pass = 'mysql';
 }
 
 var pool = mysql.createPool({
