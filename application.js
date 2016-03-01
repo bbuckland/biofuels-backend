@@ -38,7 +38,7 @@ app.use('/api/v1/sample/list', require('./routes/sample/list'));
 app.use('/api/v1/customer/create', require('./routes/customer/create'));
 app.use('/api/v1/customer/list', require('./routes/customer/list'));
 app.use('/api/v1/vial/create', require('./routes/vial/create'));
-
+app.use('/api/v1/vial/list', require('./routes/vial/list'));
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
 app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
