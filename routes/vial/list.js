@@ -54,6 +54,14 @@ router.get('/', function (req, res) {
     {
         sql=sql_spk;
     }
+    else
+    {
+        res.status(401);
+        return res.json({
+            code: 401,
+            error: "Invalid URL Parameter"
+        });
+    }
 
 
     db.query(sql).then(function (data) {
@@ -61,7 +69,7 @@ router.get('/', function (req, res) {
             res.status(401);
             return res.json({
                 code: 401,
-                error: "No customers were found"
+                error: "No list were found"
             });
         }
 
