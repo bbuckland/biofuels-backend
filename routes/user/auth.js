@@ -53,8 +53,8 @@ router.post('/', function (req, res) {
 
 
 
-  var sql = 'SELECT * FROM bio_users WHERE email = ? AND password_hash = ?';
-  var sqlParams = [params.email, password_hash];
+  var sql = 'SELECT * FROM bio_users WHERE email = ?';
+  var sqlParams = [params.email];
 
   db.query(sql, sqlParams).then(function (data) {
     if (data.length != 1) {
