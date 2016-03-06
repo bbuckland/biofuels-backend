@@ -5,7 +5,7 @@
     "vial_type": {
       "type": "string"
     },
-    "vials" : {
+    "vials": {
       "type": "array",
       "items": {
         "type": "object",
@@ -15,17 +15,17 @@
           },
           "preparationDate": {
             "type": "string",
-            //"format": "date-time"
+            "format": "date-time"
           },
           "vialStatus": {
-            "type": "string"
+            "type": "number"
           },
           "fattyAcidmass": {
             "type": "number"
           },
           "c15Istdcon": {
             "type": "number"
-          }
+          },
           "c13Mass": {
             "type": "number"
           },
@@ -41,14 +41,15 @@
           "Mass450mlsample": {
             "type": "number"
           }
-        }
+        },
+        "oneOf": [
+          { "required": [ "vialId", "preparationDate", "vialStatus", "fattyAcidmass", "c15Istdcon"] },
+          { "required": [ "vialId", "preparationDate", "vialStatus", "c13Mass", "c13Istdcon", "c19Istdcon"] },
+          { "required": [ "vialId", "preparationDate", "vialStatus", "c15Mass","Mass450mlsample"] }
+        ]
       }
-    },
-  "oneOf": [
-    { "required": [ "vialId", "preparationDate", "vialStatus", "fattyAcidmass", "c15Istdcon"] },
-    { "required": [ "vialId", "preparationDate", "vialStatus", "c13Mass", "c13Istdcon", "c19Istdcon"] },
-    { "required": [ "vialId", "preparationDate", "vialStatus"] },
-  ],
+    }
+  },
 
   "required": ["vial_type"]
 }

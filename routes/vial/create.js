@@ -52,62 +52,133 @@ router.post('/', function (req, res) {
 
 
 
-    var sql = 'INSERT INTO `bio_vials`(`vial_id`, `day_prepared`, `status`) VALUES (? , ? , ?)';
-    var  sql2 = 'INSERT INTO `bio_vials_rxn`(`vial_id`, `fatty_acid_mass`, `c15_istd_concentration`) VALUES (? , ? , ? )';
     if (params.vial_type === "RXN")
     {
+        var  sql = 'INSERT INTO `bio_vials_rxn`(`vial_id`, `date_prepared`, `status`, `fatty_acid_mass`, `c15_istd_concentration`) VALUES ?';
         var sqlParams = [];
 
         async.eachSeries(params.vials, function (vial, callback) {
             var param = [
                 vial.vialId,
                 vial.preparationDate,
-                vial.vialStatus
+                vial.vialStatus,
+                vial.fattyAcidmass,
+                vial.c15Istdcon
             ];
 
             sqlParams.push(param);
             callback();
         }, function () {
             console.log(sqlParams);
+            db.query(sql, [sqlParams]).then(function (data) {
+
+                //setup our response
+                var resp = {
+                    status: 'Ok'
+                };
+
+
+                //send down our response
+                res.json(resp);
+
+            }).catch(function (err) {
+                console.error('MySQL: ', err);
+                res.status(500);
+                return res.json({
+                    code: 500,
+                    error: 'Uh oh! We can\'t even!'
+                });
+            });
+
         });
 
-        //db.query(sql, sqlParams).then(function (data) {
-        //
-        //    var insertedID = data.insertId;
-        //
-        //
-        //    db.query(sql2, sqlParams2).then(function () {
-        //
-        //
-        //    }).catch(function (err) {
-        //        console.error('MySQL: ', err);
-        //        res.status(500);
-        //        return res.json({
-        //            code: 500,
-        //            error: 'Uh oh! We can\'t even!'
-        //        });
-        //    });
-        //
-        //
-        //}).catch(function (err) {
-        //    console.error('MySQL: ', err);
-        //    res.status(500);
-        //    return res.json({
-        //        code: 500,
-        //        error: 'Uh oh! We can\'t even!'
-        //    });
-        //});
+    }
+    else if (params.vial_type === "GC")
+    {
+       sql = 'INSERT INTO `bio_vials_gc`(`vial_id`, `date_prepared`, `status`, `c13_mass`, `c13_istd_concentration`, `c19_istd_concentration`) VALUES ?';
+       sqlParams = [];
 
+        async.eachSeries(params.vials, function (vial, callback) {
+            var param = [
+                vial.vialId,
+                vial.preparationDate,
+                vial.vialStatus,
+                vial.c13Mass,
+                vial.c13Istdcon,
+                vial.c19Istdcon
+            ];
+
+            sqlParams.push(param);
+            callback();
+        }, function () {
+            console.log(sqlParams);
+            db.query(sql, [sqlParams]).then(function (data) {
+
+                //setup our response
+                var resp = {
+                    status: 'Ok'
+                };
+
+
+                //send down our response
+                res.json(resp);
+
+            }).catch(function (err) {
+                console.error('MySQL: ', err);
+                res.status(500);
+                return res.json({
+                    code: 500,
+                    error: 'Uh oh! We can\'t even!'
+                });
+            });
+
+        });
+
+    }
+    else if (params.vial_type === "SPK")
+    {
+        sql = 'INSERT INTO `bio_vials_spike`(`vial_id`, `date_prepared`, `status`, `c15_mass`, `Mass_450ml_sample`) VALUES ?';
+        sqlParams = [];
+
+        async.eachSeries(params.vials, function (vial, callback) {
+            var param = [
+                vial.vialId,
+                vial.preparationDate,
+                vial.vialStatus,
+                vial.c15Mass,
+                vial.Mass450mlsample
+            ];
+
+            sqlParams.push(param);
+            callback();
+        }, function () {
+            console.log(sqlParams);
+            db.query(sql, [sqlParams]).then(function (data) {
+
+                //setup our response
+                var resp = {
+                    status: 'Ok'
+                };
+
+
+                //send down our response
+                res.json(resp);
+
+            }).catch(function (err) {
+                console.error('MySQL: ', err);
+                res.status(500);
+                return res.json({
+                    code: 500,
+                    error: 'Uh oh! We can\'t even!'
+                });
+            });
+
+        });
 
     }
 
 
-    //setup our response
-    var resp = {
-        status: 'Ok'
-    };
-    //send down our response
-    res.json(resp);
+
 
 
 });
