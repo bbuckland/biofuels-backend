@@ -33,22 +33,20 @@ var router = express.Router();
  * @apiSuccess {String} token Token for future request headers
  */
 router.get('/', function (req, res) {
-   // var params = req.header("vial_type");
+
     var vType = req.query.vial_type;
 
+    var sql_rxn = 'SELECT * FROM `bio_vials_rxn` ';
+    var sql_gc = 'SELECT * FROM `bio_vials_gc` ';
+    var sql_spk = 'SELECT * FROM `bio_vials_spike` ';
 
-    var sql_gc = 'SELECT bio_vials.id, bio_vials.vial_id, bio_vials.sample_id, bio_vials.day_prepared, bio_vials.status, bio_vials_gc.c13_mass, bio_vials_gc.c13_istd_concentration, bio_vials_gc.c19_istd_concentration FROM bio_vials INNER JOIN bio_vials_gc ON bio_vials.id=bio_vials_gc.vial_id';
-    var sql_rxn = 'SELECT bio_vials.id, bio_vials.vial_id, bio_vials.sample_id, bio_vials.day_prepared, bio_vials.status, bio_vials_rxn.fatty_acid_mass, bio_vials_rxn.c15_istd_concentration FROM bio_vials INNER JOIN bio_vials_rxn ON bio_vials.id=bio_vials_rxn.vial_id';
-    var sql_spk = 'SELECT bio_vials.id, bio_vials.vial_id, bio_vials.sample_id, bio_vials.day_prepared, bio_vials.status, bio_vials_spike.c15_mass, bio_vials_spike.Mass_450ml_sample, bio_vials_spike.gc_vial_id FROM bio_vials INNER JOIN bio_vials_spike ON bio_vials.id=bio_vials_spike.vial_id';
-
-    if (vType === "GC")
+    if (vType === "RXN")
+    {
+       var sql=sql_rxn;
+    }
+    else if (vType === "GC")
     {
         sql = sql_gc;
-    }
-    else if (vType === "RXN")
-    {
-        sql=sql_rxn;
-
     }
     else if (vType === "SPK")
     {
@@ -65,13 +63,6 @@ router.get('/', function (req, res) {
 
 
     db.query(sql).then(function (data) {
-        if (data.length == 0) {
-            res.status(401);
-            return res.json({
-                code: 401,
-                error: "No list were found"
-            });
-        }
 
         var resp = {
             data: data
