@@ -43,8 +43,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": ["type", "name", "description", "speciesId", "containerType", "collectionDate"]
+        }
       }
     }
   },
