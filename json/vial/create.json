@@ -5,37 +5,51 @@
     "vial_type": {
       "type": "string"
     },
-    "vial_id": {
-      "type": "string"
-    },
-    "preparation_date": {
-      "type": "string",
-      "pattern": "^[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}$"
-    },
-    "vial_status": {
-      "type": "string"
-    },
-    "Mass_50ml_fa": {
-      "type": "number"
-    },
-    "Con_C15FA_ISTD": {
-      "type": "number"
-    },
-    "Mass_50ml_C13": {
-      "type": "number"
-    },
-    "Con_C13_ISTD": {
-      "type": "number"
-    },
-    "Con_C19_ISTD": {
-      "type": "number"
-    },
-    "Mass_50ml_C15": {
-      "type": "number"
-    },
-    "Mass_450ml_sample": {
-      "type": "number"
+    "vials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vialId": {
+            "type": "string"
+          },
+          "preparationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vialStatus": {
+            "type": "number"
+          },
+          "fattyAcidmass": {
+            "type": "number"
+          },
+          "c15Istdcon": {
+            "type": "number"
+          },
+          "c13Mass": {
+            "type": "number"
+          },
+          "c13Istdcon": {
+            "type": "number"
+          },
+          "c19Istdcon": {
+            "type": "number"
+          },
+          "c15Mass": {
+            "type": "number"
+          },
+          "Mass450mlsample": {
+            "type": "number"
+          }
+        },
+        "oneOf": [
+          { "required": [ "vialId", "preparationDate", "vialStatus", "fattyAcidmass", "c15Istdcon"] },
+          { "required": [ "vialId", "preparationDate", "vialStatus", "c13Mass", "c13Istdcon", "c19Istdcon"] },
+          { "required": [ "vialId", "preparationDate", "vialStatus", "c15Mass","Mass450mlsample"] }
+        ]
+      }
     }
   },
-  "required": ["vial_type", "vial_id", "preparation_date", "vial_status"]
+
+  "required": ["vial_type"]
 }
