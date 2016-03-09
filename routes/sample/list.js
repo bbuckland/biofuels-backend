@@ -36,7 +36,7 @@ var router = express.Router();
 router.get('/', function (req, res) {
 
 
-    var sql = 'SELECT * FROM bio_samples';
+    var sql = 'SELECT * FROM bio_samples_v';
 
 
     db.query(sql).then(function (data) {
