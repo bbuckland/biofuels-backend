@@ -1,0 +1,60 @@
+{
+  "title": "Esterification",
+  "type": "object",
+  "properties": {
+    "esterdata": {
+      "type": "array",
+      "items":{
+        "type": "object",
+        "properties": {
+          "sampleId": {
+            "type": "number"
+          },
+          "reagentQty": {
+            "type": "number"
+          },
+          "preSampleClr": {
+            "type": "string"
+          },
+          "thmxId": {
+            "type": "number"
+          },
+          "thmxLoc": {
+            "type": "number"
+          },
+          "thmxDateRun": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "thmxStartTemp": {
+            "type": "number"
+          },
+          "thmxEndTemp": {
+            "type": "number"
+          },
+          "thmxRpm": {
+            "type": "number"
+          },
+          "thmxEndTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "postSampleClr": {
+            "type": "string"
+          },
+          "methLoss": {
+            "type": "string"
+          },
+          "precipitate": {
+            "type": "string"
+          },
+          "thmxCoolTime": {
+            "type": "string",
+            "format": "time"
+          }
+        }
+      }
+    }
+  }
+
+}
