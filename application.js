@@ -40,6 +40,8 @@ app.use('/api/v1/customer/list', require('./routes/customer/list'));
 app.use('/api/v1/vial/create', require('./routes/vial/create'));
 app.use('/api/v1/vial/list', require('./routes/vial/list'));
 app.use('/api/v1/test-process/esterification', require('./routes/test-process/esterification'));
+app.use('/api/v1/test-process/fame', require('./routes/test-process/fame'));
+
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
 app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
