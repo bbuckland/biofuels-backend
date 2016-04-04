@@ -58,8 +58,8 @@ router.post('/', function (req, res) {
     }).then(function (tempbatchId) {
         var newData = [];
         async.eachSeries(params.esterdata, function (data, callback) {
-            var params = [tempbatchId,
-                data.sampleID,
+            var params = [data.sampleId,
+                tempbatchId,
                 data.reagentQty,
                 data.preSampleClr,
                 data.thmxId,
@@ -78,6 +78,7 @@ router.post('/', function (req, res) {
             newData.push(params);
             callback();
         }, function () {
+
             var sql2 = 'INSERT INTO `bio_esterification`(`sample_id`, `temp_batch_id`, `reagent_qty`, `pre_sample_color`, `th_mx_id`, `th_mx_location`, `th_mx_date_run`, `th_mx_start_temp`, `th_mx_end_temp`, `th_mx_rpm`, `th_mx_end_time`, `post_sample_color`, `methanol_loss`, `precipitate`, `cool_down_time`, `created_by`, `modified_by`) VALUES ?';
 
 
