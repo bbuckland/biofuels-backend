@@ -78,7 +78,7 @@ router.post('/', function (req, res) {
             newData.push(params);
             callback();
         }, function () {
-            var sql2 = 'INSERT INTO `bio_fame`(`sample_id`, `prep_analyst_id`, `water_volume`, `post_water_color`, `hexane_mass`, `vortex_mx_id`, `vortex_mx_time`, `mixer_analyst_id`, `centrifuge_id`, `centrifuge_start_time`, `centrifuge_total_time`, `centrifuge_rpm`, `centrifuge_temp`, `post_hexane_color`, `created_by`, `modified_by`) VALUES ?';
+            var sql2 = 'INSERT INTO `bio_fame`(`sample_id`, `temp_batch_id`, `prep_analyst_id`, `water_volume`, `post_water_color`, `hexane_mass`, `vortex_mx_id`, `vortex_mx_time`, `mixer_analyst_id`, `centrifuge_id`, `centrifuge_start_time`, `centrifuge_total_time`, `centrifuge_rpm`, `centrifuge_temp`, `post_hexane_color`, `created_by`, `modified_by`) VALUES ?';
 
 
             return db.query(sql2, [newData]);
