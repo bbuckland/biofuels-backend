@@ -12,10 +12,13 @@
           },
           "rxnVialId": {
             "type": "number"
+          },
+          "massAddVial": {
+            "type": "number"
           }
         }
       }
     }
-  }
-
+  },
+  "required": ["rxndata"]
 }

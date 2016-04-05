@@ -50,38 +50,34 @@ router.post('/', function (req, res) {
     }
 
 
-
-
-        var newData = [];
         async.eachSeries(params.rxndata, function (data, callback) {
-            var params = [
-                data.rxnVialId,
-                '7',
-                data.sampleId];
-
-            newData.push(params);
-            callback();
-        }, function () {
-            var sql2 = 'UPDATE `bio_samples` SET `rxn_vial_id`= ?,`modified_by`= ? WHERE `id` = ?';
-
-
-            return db.query(sql2, [newData]);
-        }).then(function () {
-            var resp = {
-                status: 'Ok'
-            };
-
-            //send down our response
-            res.json(resp);
-        })
-        .catch(function (err) {
-            console.error('MySQL: ', err);
-            res.status(500);
-            return res.json({
-                code: 500,
-                error: 'Uh oh! We can\'t even!'
+            var params = [data.rxnVialId, data.massAddVial, 8, data.sampleId];
+            var sql2 = 'UPDATE `bio_samples` SET `rxn_vial_id`= ?, `mass_add_rxn`= ?, `modified_by`= ? WHERE `id` = ?';
+            var sqlquery = db.query(sql2, params);
+            sqlquery.catch(function (err) {
+                    console.error('MySQL: ', err);
+                    res.status(500);
+                    return res.json({
+                        code: 500,
+                        error: 'Uh oh! We can\'t even!'
+                    });
             });
+            callback();
+        }, function(err){
+            if( err ) {
+                console.log('Failed');
+            } else {
+                console.log('RXN Selection Complete');
+                var resp = {
+                    status: 'Ok'
+                };
+
+                //send down our response
+                res.json(resp);
+            }
+
         });
+
 });
 
 //export our router
