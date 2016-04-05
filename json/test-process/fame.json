@@ -1,0 +1,60 @@
+{
+  "title": "Fame",
+  "type": "object",
+  "properties": {
+    "famedata": {
+      "type": "array",
+      "items":{
+        "type": "object",
+        "properties": {
+          "sampleId": {
+            "type": "number"
+          },
+          "prepAnalystId": {
+            "type": "number"
+          },
+          "waterVol": {
+            "type": "number"
+          },
+          "postWaterClr": {
+            "type": "string"
+          },
+          "hexMass": {
+            "type": "number"
+          },
+          "vortexMxId": {
+            "type": "number"
+          },
+          "vortexMxTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "mixerAnalystId": {
+            "type": "number"
+          },
+          "centrifugeId": {
+            "type": "number"
+          },
+          "centrifugeStartTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "centrifugeTotalTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "centrifugeRpm": {
+            "type": "number"
+          },
+          "centrifugeTemp": {
+            "type": "number"
+          },
+          "postHexClr": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": ["famedata"]
+}
