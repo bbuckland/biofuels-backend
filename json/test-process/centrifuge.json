@@ -1,0 +1,38 @@
+{
+  "title": "Centrifuge",
+  "type": "object",
+  "properties": {
+    "centrifugedata": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sampleId": {
+            "type": "number"
+          },
+          "centrifugeId": {
+            "type": "number"
+          },
+          "centrifugeStartTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "centrifugeTotalTime": {
+            "type": "number"
+          },
+          "centrifugeRpm": {
+            "type": "number"
+          },
+          "centrifugeTemp": {
+            "type": "number"
+          },
+          "postHexClr": {
+            "type": "string"
+          }
+        },
+
+        "required" : ["sampleId", "centrifugeId", "centrifugeStartTime", "centrifugeTotalTime", "centrifugeRpm", "centrifugeTemp", "postHexClr"]
+      }
+    }
+  }
+}
