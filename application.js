@@ -38,6 +38,7 @@ app.use('/api/v1/batch/list', require('./routes/batch/list'));
 app.use('/api/v1/sample/list', require('./routes/sample/list'));
 app.use('/api/v1/customer/create', require('./routes/customer/create'));
 app.use('/api/v1/customer/list', require('./routes/customer/list'));
+app.use('/api/v1/customer/update', require('./routes/customer/update'));
 app.use('/api/v1/vial/create', require('./routes/vial/create'));
 app.use('/api/v1/vial/list', require('./routes/vial/list'));
 app.use('/api/v1/test-process/esterification', require('./routes/test-process/esterification'));

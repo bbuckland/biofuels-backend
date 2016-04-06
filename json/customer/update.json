@@ -1,0 +1,49 @@
+{
+  "title": "Customer Update",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "customer_code": {
+      "type": "string"
+    },
+    "contact_name1": {
+      "type": "string"
+    },
+    "contact_name2": {
+      "type": "string"
+    },
+    "billing_name": {
+      "type": "string"
+    },
+    "address_1": {
+      "type": "string"
+    },
+    "address_2": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "number"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    }
+
+  },
+
+  "required" : ["id"]
+
+}
