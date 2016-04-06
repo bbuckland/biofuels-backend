@@ -41,6 +41,7 @@ app.use('/api/v1/vial/create', require('./routes/vial/create'));
 app.use('/api/v1/vial/list', require('./routes/vial/list'));
 app.use('/api/v1/test-process/esterification', require('./routes/test-process/esterification'));
 app.use('/api/v1/test-process/fame', require('./routes/test-process/fame'));
+app.use('/api/v1/test-process/rxnselection', require('./routes/test-process/rxnselection'));
 
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);

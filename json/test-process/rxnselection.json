@@ -1,0 +1,25 @@
+{
+  "title": "RXN Selection",
+  "type": "object",
+  "properties": {
+    "rxndata": {
+      "type": "array",
+      "items":{
+        "type": "object",
+        "properties": {
+          "sampleId": {
+            "type": "number"
+          },
+          "rxnVialId": {
+            "type": "number"
+          },
+          "massAddVial": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": ["rxndata"]
+
+}
