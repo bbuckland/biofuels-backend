@@ -1,0 +1,34 @@
+{
+  "title": "Vortex",
+  "type": "object",
+  "properties": {
+    "vortexdata": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sampleId": {
+            "type": "number"
+          },
+          "waterVol": {
+            "type": "number"
+          },
+          "postWaterClr": {
+            "type": "string"
+          },
+          "hexMass": {
+            "type": "number"
+          },
+          "vortexMxId": {
+            "type": "number"
+          },
+          "vortexMxTime": {
+            "type": "number"
+          }
+        },
+
+        "required" : ["sampleId", "waterVol", "postWaterClr","hexMass","vortexMxId","vortexMxTime"]
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 /**
- * Created by joa3894 on 4/3/16.
- * Test-Process/estrification - index.js
+ * Created by joa3894 on 4/6/16.
+ * Test-Process/vortex - index.js
  * FAME process
  * @type {*|exports|module.exports}
  */
@@ -12,7 +12,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 var async = require('async');
-var authSchema = require('../../json/test-process/fame.json');
+var authSchema = require('../../json/test-process/vortex.json');
 var db = require('../../library/mysql-pool.js');
 
 //init express router
@@ -57,28 +57,21 @@ router.post('/', function (req, res) {
         return data.insertId;
     }).then(function (tempbatchId) {
         var newData = [];
-        async.eachSeries(params.famedata, function (data, callback) {
+        async.eachSeries(params.vortexdata, function (data, callback) {
             var params = [data.sampleId,
                 tempbatchId,
-                data.prepAnalystId,
                 data.waterVol,
                 data.postWaterClr,
                 data.hexMass,
                 data.vortexMxId,
                 data.vortexMxTime,
-                data.mixerAnalystId,
-                data.centrifugeId,
-                data.centrifugeStartTime,
-                data.centrifugeTotalTime,
-                data.centrifugeRpm,
-                data.centrifugeTemp,
-                data.postHexClr,
+                '6',
                 '7', '7'];
 
             newData.push(params);
             callback();
         }, function () {
-            var sql2 = 'INSERT INTO `bio_fame` (`sample_id`, `temp_batch_id`, `prep_analyst_id`, `water_volume`, `post_water_color`, `hexane_mass`, `vortex_mx_id`, `vortex_mx_time`, `mixer_analyst_id`, `centrifuge_id`, `centrifuge_start_time`, `centrifuge_total_time`, `centrifuge_rpm`, `centrifuge_temp`, `post_hexane_color`, `created_by`, `modified_by`) VALUES ?';
+            var sql2 = 'INSERT INTO `bio_vortex`(`sample_id`, `temp_batch_id`, `water_volume`, `post_water_color`, `hexane_mass`, `vortex_mx_id`, `vortex_mx_time`, `analyst_id`, `created_by`, `modified_by`) VALUES ?';
 
 
             return db.query(sql2, [newData]);
