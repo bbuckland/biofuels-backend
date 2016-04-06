@@ -1,0 +1,45 @@
+{
+  "title": "Vial Update",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "vial_type": {
+      "type": "string"
+    },
+    "vialId": {
+      "type": "string"
+    },
+    "preparationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fattyAcidmass": {
+      "type": "number"
+    },
+    "c15Istdcon": {
+      "type": "number"
+    },
+    "c13Mass": {
+      "type": "number"
+    },
+    "c13Istdcon": {
+      "type": "number"
+    },
+    "c19Istdcon": {
+      "type": "number"
+    },
+    "c15Mass": {
+      "type": "number"
+    },
+    "Mass450mlsample": {
+      "type": "number"
+    }
+  },
+  "oneOf": [
+          { "required": [ "vial_type", "vialId", "preparationDate", "fattyAcidmass", "c15Istdcon"] },
+          { "required": [ "vial_type", "vialId", "preparationDate", "c13Mass", "c13Istdcon", "c19Istdcon"] },
+          { "required": [ "vial_type", "vialId", "preparationDate", "c15Mass","Mass450mlsample"] }
+        ]
+}
