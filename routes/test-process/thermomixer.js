@@ -12,7 +12,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
 var async = require('async');
-var authSchema = require('../../json/test-process/esterification.json');
+var authSchema = require('../../json/test-process/thermomixer.json');
 var db = require('../../library/mysql-pool.js');
 
 //init express router
@@ -57,7 +57,7 @@ router.post('/', function (req, res) {
         return data.insertId;
     }).then(function (tempbatchId) {
         var newData = [];
-        async.eachSeries(params.esterdata, function (data, callback) {
+        async.eachSeries(params.thermodata, function (data, callback) {
             var params = [data.sampleId,
                 tempbatchId,
                 data.reagentQty,
@@ -79,7 +79,7 @@ router.post('/', function (req, res) {
             callback();
         }, function () {
 
-            var sql2 = 'INSERT INTO `bio_esterification`(`sample_id`, `temp_batch_id`, `reagent_qty`, `pre_sample_color`, `th_mx_id`, `th_mx_location`, `th_mx_date_run`, `th_mx_start_temp`, `th_mx_end_temp`, `th_mx_rpm`, `th_mx_end_time`, `post_sample_color`, `methanol_loss`, `precipitate`, `cool_down_time`, `created_by`, `modified_by`) VALUES ?';
+            var sql2 = 'INSERT INTO `bio_thermomixer`(`sample_id`, `temp_batch_id`, `reagent_qty`, `pre_sample_color`, `th_mx_id`, `th_mx_location`, `th_mx_date_run`, `th_mx_start_temp`, `th_mx_end_temp`, `th_mx_rpm`, `th_mx_end_time`, `post_sample_color`, `methanol_loss`, `precipitate`, `cool_down_time`, `created_by`, `modified_by`) VALUES ?';
 
 
             return db.query(sql2, [newData]);

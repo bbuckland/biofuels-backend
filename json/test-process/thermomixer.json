@@ -1,8 +1,8 @@
 {
-  "title": "Esterification",
+  "title": "Thermomixer",
   "type": "object",
   "properties": {
-    "esterdata": {
+    "thermodata": {
       "type": "array",
       "items":{
         "type": "object",
@@ -49,13 +49,12 @@
             "type": "string"
           },
           "thmxCoolTime": {
-            "type": "string",
-            "format": "time"
+            "type": "number"
           }
-        }
+        },
+        "required": ["sampleId", "reagentQty", "preSampleClr", "thmxId", "thmxLoc", "thmxDateRun", "thmxStartTemp", "thmxEndTemp", "thmxRpm", "thmxEndTime", "postSampleClr", "methLoss", "precipitate", "thmxCoolTime"]
+
       }
     }
-  },
-  "required": ["esterdata"]
-
+  }
 }
