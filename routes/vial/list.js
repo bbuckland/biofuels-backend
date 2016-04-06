@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
 
     var vType = req.query.vial_type;
 
-    var sql_rxn = 'SELECT * FROM `bio_vials_rxn` ';
+    var sql_rxn = 'SELECT * FROM `bio_vials_rxn_v` ';
     var sql_gc = 'SELECT * FROM `bio_vials_gc` ';
     var sql_spk = 'SELECT * FROM `bio_vials_spike` ';
 
