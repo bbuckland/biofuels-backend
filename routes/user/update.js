@@ -1,0 +1,88 @@
+/**
+ * Created by joa3894 on 4/5/2016.
+ * User/Auth - index.js
+ * This sets up our authentication routes for Streams
+ * @type {*|exports|module.exports}
+ */
+
+
+//Include our libraries
+var express = require('express');
+var jwt = require('jsonwebtoken');
+var Ajv = require('ajv');
+var authSchema = require('../../json/user/update.json');
+var db = require('../../library/mysql-pool.js');
+var crypto = require('crypto');
+
+//init express router
+var router = express.Router();
+
+//init validation
+var ajv = Ajv(); // options can be passed
+var validate = ajv.compile(authSchema);
+
+/**
+ * @api {post} /user/auth Authenticate
+ * @apiName authUser
+ * @apiGroup User
+ * @apiVersion 1.0.0
+ * @apiParam {String} email Email of the user logging in
+ * @apiParam {String} password Encrypted user's password
+ *
+ * @apiSuccess {Int} user_id The ID of the User.
+ * @apiSuccess {String} full_name Full name of the User.
+ * @apiSuccess {String} email  The email of the User.
+ * @apiSuccess {String} token Token for future request headers
+ */
+router.post('/', function (req, res) {
+    var params = req.body;
+
+    if (!validate(params)) {
+        console.error('JSON: ', validate.errors);
+
+        res.status(422);
+        return res.json({
+            code: 422,
+            error: validate.errors
+        });
+    }
+
+    if (params.password != "") {
+        var key = process.env.HASH_KEY || 'dev :: biofuels makes algae cool again';
+        var hash = crypto.createHmac('sha512', key);
+        hash.update(params.password);
+        var password_hash = hash.digest('hex');
+    }
+    else
+    {
+        password_hash = "";
+    }
+
+
+
+    var sql = 'UPDATE `bio_users` SET `full_name`= ?,`password_hash`= ? WHERE `email`= ?';
+    var sqlParams = [params.full_name, password_hash, params.email];
+
+
+    db.query(sql, sqlParams).then(function (data) {
+
+                //setup our response
+                var resp = {
+                    status: 'Ok'
+                };
+                //send down our response
+                res.json(resp);
+
+    }).catch(function (err) {
+        console.error('MySQL: ', err);
+        res.status(500);
+        return res.json({
+            code: 500,
+            error: 'Uh oh! We can\'t even!'
+        });
+    });
+
+});
+
+//export our router
+module.exports = router;

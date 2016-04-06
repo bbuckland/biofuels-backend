@@ -33,6 +33,7 @@ app.use('/docs', express.static('docs'));
 app.use('/api/v1/user/auth', require('./routes/user/auth'));
 app.use('/api/v1/user/create', require('./routes/user/create'));
 app.use('/api/v1/user/list', require('./routes/user/list'));
+app.use('/api/v1/user/update', require('./routes/user/update'));
 app.use('/api/v1/batch/create', require('./routes/batch/create'));
 app.use('/api/v1/batch/list', require('./routes/batch/list'));
 app.use('/api/v1/sample/list', require('./routes/sample/list'));
