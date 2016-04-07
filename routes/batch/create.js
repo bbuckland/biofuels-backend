@@ -90,7 +90,7 @@ router.post('/', function (req, res) {
                 i++;
                 cb();
             }, function () {
-                return i < rep;
+                return rep >= i;
             }, function (err, n) {
                 console.error(err);
                 console.log('ran n times: ' + n);
