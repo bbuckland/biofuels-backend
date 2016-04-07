@@ -46,6 +46,7 @@ app.use('/api/v1/test-process/thermomixer', require('./routes/test-process/therm
 app.use('/api/v1/test-process/vortex', require('./routes/test-process/vortex'));
 app.use('/api/v1/test-process/centrifuge', require('./routes/test-process/centrifuge'));
 app.use('/api/v1/test-process/rxnselection', require('./routes/test-process/rxnselection'));
+app.use('/api/v1/lovs/list', require('./routes/lovs/list'));
 
 //setup for deployment on openshift
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
