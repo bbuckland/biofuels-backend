@@ -69,7 +69,11 @@ router.post('/', function (req, res) {
     }).then(function (batchId) {
         var newSamples = [];
         async.eachSeries(params.samples, function (sample, callback) {
-            var rep = +sample.replicates;
+            if (sample.replicates) {
+                var rep = +sample.replicates;
+            } else {
+                var rep = 1;
+            }
             var i = 1;
             async.doWhilst(function (cb) {
                 var name = sample.name;
