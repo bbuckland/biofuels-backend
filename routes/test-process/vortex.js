@@ -7,7 +7,7 @@
 
 
 //Include our libraries
-var date = require('moment');
+var moment = require('moment');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
@@ -50,7 +50,7 @@ router.post('/', function (req, res) {
     }
 
     var tempbatchSql = 'INSERT INTO bio_temp_batches (start_date) VALUES (?)';
-    var startDate = date().format();
+    var startDate = moment().format("YYYY-MM-DD HH:mm:ss");
     var tempbatchParams = [startDate];
 
     db.query(tempbatchSql, tempbatchParams).then(function (data) {

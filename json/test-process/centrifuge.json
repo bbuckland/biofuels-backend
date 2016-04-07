@@ -13,9 +13,12 @@
           "centrifugeId": {
             "type": "number"
           },
-          "centrifugeStartTime": {
+          "centrifugeLocation": {
+            "type": "number"
+          },
+          "centrifugeDateRun": {
             "type": "string",
-            "format": "time"
+            "format": "date-time"
           },
           "centrifugeTotalTime": {
             "type": "number"
@@ -31,7 +34,7 @@
           }
         },
 
-        "required" : ["sampleId", "centrifugeId", "centrifugeStartTime", "centrifugeTotalTime", "centrifugeRpm", "centrifugeTemp", "postHexClr"]
+        "required" : ["sampleId", "centrifugeId", "centrifugeLocation", "centrifugeDateRun", "centrifugeTotalTime", "centrifugeRpm", "centrifugeTemp", "postHexClr"]
       }
     }
   }

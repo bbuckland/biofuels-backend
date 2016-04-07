@@ -10,7 +10,7 @@
 
 
 //Include our libraries
-var date = require('moment');
+var moment = require('moment');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var Ajv = require('ajv');
@@ -52,10 +52,10 @@ router.post('/', function (req, res) {
         });
     }
 
-    var tempbatchSql = 'INSERT INTO bio_temp_batches (start_date) VALUES (?)';
-    var startDate = date().format();
+    var tempbatchSql = 'INSERT INTO `bio_temp_batches`(`start_date`) VALUES (?)';
+    var startDate = moment().format("YYYY-MM-DD HH:mm:ss");
+    console.log(startDate);
     var tempbatchParams = [startDate];
-
     db.query(tempbatchSql, tempbatchParams).then(function (data) {
         return data.insertId;
     }).then(function (tempbatchId) {
@@ -64,7 +64,8 @@ router.post('/', function (req, res) {
             var params = [data.sampleId,
                 tempbatchId,
                 data.centrifugeId,
-                data.centrifugeStartTime,
+                data.centrifugeLocation,
+                moment(data.centrifugeDateRun).format("YYYY-MM-DD HH:mm:ss"),
                 data.centrifugeTotalTime,
                 data.centrifugeRpm,
                 data.centrifugeTemp,
@@ -75,7 +76,7 @@ router.post('/', function (req, res) {
             newData.push(params);
             callback();
         }, function () {
-            var sql2 = 'INSERT INTO `bio_centrifuge`(`sample_id`, `temp_batch_id`, `centrifuge_id`, `centrifuge_start_time`, `centrifuge_total_time`, `centrifuge_rpm`, `centrifuge_temp`, `post_hexane_color`, `analyst_id`, `created_by`, `modified_by`) VALUES ?';
+            var sql2 = 'INSERT INTO `bio_centrifuge`(`sample_id`, `temp_batch_id`, `centrifuge_id`, `centrifuge_location`, `centrifuge_date_run`, `centrifuge_total_time`, `centrifuge_rpm`, `centrifuge_temp`, `post_hexane_color`, `analyst_id`, `created_by`, `modified_by`) VALUES ?';
 
 
             return db.query(sql2, [newData]);
