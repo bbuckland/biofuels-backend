@@ -33,6 +33,9 @@
           "description": {
             "type": "string"
           },
+          "replicates": {
+            "type": "string"
+          },
           "speciesId": {
             "type": "string"
           },

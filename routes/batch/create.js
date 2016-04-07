@@ -69,18 +69,35 @@ router.post('/', function (req, res) {
     }).then(function (batchId) {
         var newSamples = [];
         async.eachSeries(params.samples, function (sample, callback) {
-            var params = [batchId,
-                sample.type,
-                sample.name,
-                sample.description,
-                sample.speciesId,
-                sample.containerType,
-                sample.collectionDate, '7', '7'];
+            var rep = +sample.replicates;
+            var i = 1;
+            async.doWhilst(function (cb) {
+                var name = sample.name;
+                if (rep > 1) {
+                    name = name + '_' + i;
+                }
 
-            newSamples.push(params);
+                var params = [batchId,
+                    sample.type,
+                    name,
+                    rep,
+                    sample.description,
+                    sample.speciesId,
+                    sample.containerType,
+                    sample.collectionDate, '7', '7'];
+
+                newSamples.push(params);
+                i++;
+                cb();
+            }, function () {
+                return i < rep;
+            }, function (err, n) {
+                console.error(err);
+                console.log('ran n times: ' + n);
+            });
             callback();
         }, function () {
-            var sql2 = 'INSERT INTO `bio_samples` (`batch_id`, `type`, `name`, `description`, ' +
+            var sql2 = 'INSERT INTO `bio_samples` (`batch_id`, `type`, `name`, `replicates`, `description`, ' +
                 '`species_id`, `container_type`, `collection_date`, `created_by`, `modified_by`) VALUES ?';
 
 
